@@ -1,5 +1,5 @@
-baseURL = "https://alleetanner.github.io/graphical-data-apps/"
-languageCode = "en-us"
+baseURL = "https://milliams.github.io/graphical-data-apps/"
+languageCode = "en-GB"
 defaultContentLanguage = "en"
 languageName = "English"
 title = "Graphical Data Apps"
@@ -14,7 +14,7 @@ enableGitInfo = true
 
 
 [author]
-  name = "Alastair Tanner"
+  name = "Alastair Tanner, Matt Williams"
 
 [menu]
   [[menu.main]]

@@ -32,7 +32,7 @@ At the end of the last section we had a data app with a layout ready for more co
 ## Bringing our data into the script
 We can't get much further in creating a data app without some data! Our input dataset is a CSV of global demographics - information about the economies and populations of countries. We will be using `pandas` to read our data in: Streamlit is built with `pandas` in mind: data workflows and visualisations will usually expect to be working with dataframes.
 
-[Download this `demo_dataset.csv`](https://raw.githubusercontent.com/alleetanner/graphical-data-apps/main/demo_dataset.csv) (right-click and *Save link as...*). Put the file into the folder with your `data_app.py` script.
+[Download this `demo_dataset.csv`](https://raw.githubusercontent.com/milliams/graphical-data-apps/main/demo_dataset.csv) (right-click and *Save link as...*). Put the file into the folder with your `data_app.py` script.
 
 ### Loading up `pandas`
 First, we need to update our script to import `pandas`. Add this at the top of your script add:

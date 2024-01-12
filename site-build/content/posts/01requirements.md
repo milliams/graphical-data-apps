@@ -130,7 +130,7 @@ There are three panes in Jupyter Lab that we commonly use in our teaching:
 {{< admonition type="warning" title="If you are using an alternative IDE"  open=false >}}
 Please skip this section if you are using Jupyter Lab / Anaconda.
 
-You are welcome to use another IDE, but please be confident with installing new packages into your Python environment. You will need to be running both an editor and a terminal, as in the previous section. If you use the package manager `pip`, we have provided a [`requirements.txt` file here](https://raw.githubusercontent.com/alleetanner/graphical-data-apps/main/requirements.txt), which will install the required packages. (`environment.yaml` and `requirements.txt` are essentially identical, for `conda` and `pip` respectively.) Create a suitable new folder to work in, and move the `requirements.txt` file into that folder. A typical series of commands would be:
+You are welcome to use another IDE, but please be confident with installing new packages into your Python environment. You will need to be running both an editor and a terminal, as in the previous section. If you use the package manager `pip`, we have provided a [`requirements.txt` file here](https://raw.githubusercontent.com/milliams/graphical-data-apps/main/requirements.txt), which will install the required packages. (`environment.yaml` and `requirements.txt` are essentially identical, for `conda` and `pip` respectively.) Create a suitable new folder to work in, and move the `requirements.txt` file into that folder. A typical series of commands would be:
 
 Create a new environment here, called `venv`:
 ```Terminal
