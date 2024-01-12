@@ -146,11 +146,11 @@ Give that a try and check how it looks in the app (remember to save to see the c
 Through the rest of this course we will be building a **visualiser for World Demographics Data**. Our first exercise is to prepare our layout for this.
 
 Preview each of your changes by saving your file, and you will immediately be able to see how things are looking in the apps' tab in your browser.
-1. Remove the `st.write()` and `st.header()` lines that we added earlier.
+1. Remove the `st.write()`, `st.info()` and `st.header()` lines that we added earlier.
 2. Change the **title** in the page to say "World Demographics".
-3. Put your title in the sidebar.
+3. Put your title in the sidebar and remove the `st.write()` line from it.
 4. Create **two** columns, with the left column being three times wider than the right one.
-5. Add an information box to the **left hand column**, saying "Welcome to the global demographic data explorer app." (use `st.info()`).
+5. Add an information box to the **left hand column**, saying "Welcome to the global demographic data explorer app." (use `st.info()`) and remove the `st.write()` line from it.
 6. Leave the right hand column empty - but note how it allows us to control space on the page. We will use this space later.
 7. Tab two doesn't have anything in it - add a sentence of text to it with `st.write()`.
 8. Test that everything looks as you expect it in the rendered app (in your Streamlit browser tab).

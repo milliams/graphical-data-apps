@@ -112,13 +112,14 @@ Plotly (and most graphics libraries) work best with dataframes, which we have re
 2. The data to plot on the `x` axis (ie, one of the dataframe columns)
 3. The data to plot on the `y` axis (another dataframe column)
 
-For points [2] and [3], we need to choose two dataframe columns to plot. Set your dataframe to be displayed (using the checkbox we made earlier). Let's choose the columns `CO2 per capita` as our `x`, and `GDP per capita` as our `y`.
+For points [2] and [3], we need to choose two dataframe columns to plot. Set your dataframe to be displayed (using the checkbox we made earlier). Let's choose the columns `HDI index` as our `x`, and `GDP per capita` as our `y`.
 We create our chart object like this:
 ```Python
 chart = px.scatter(
-    data_frame = demo_df,
-    x = "CO2 per capita",
-    y = "GDP per capita")
+    data_frame=demo_df,
+    x="HDI index",
+    y="GDP per capita",
+)
 ```
 Note that indentation here is for clarity, with each parameter on a new line. If a function is taking lots of parameters, it is good to make things clear with new lines: Python will allow new lines after commas, and convention is to indent to make it clear these are inside brackets. But be aware that this indentation has no functional purpose - it is purely for clarity.
 
@@ -135,16 +136,17 @@ This is a good start, but let's explore more of the parameters that `px.scatter(
 ```Python
 chart = px.scatter(
     data_frame = demo_df,
-    x = "CO2 per capita",
-    y = "GDP per capita",
-    color = "Continent")
+    x="HDI index",
+    y="GDP per capita",
+    color="Continent",
+)
 ```
 (Note that the `color` argument is spelled in International English!) Save, and notice the changes.
 
 ## Exercise 4: building a better visualisation
 {{< admonition type="question" title="Exercise 4: better visuals" open=true >}}
 So far, we have a chart which expresses three things: the CO2, GDP and continent of the countries in our dataset. In this exercise, we are adding arguments to `px.scatter()`, to include further data.
-1. We can control the size of points. Add a parameter called `size`, and assign the column name `"Services"` to it (note that any dataframe column name is a string).
+1. We can control the size of points. Add a parameter called `size`, and assign the column name `"CO2 per capita"` to it (note that any dataframe column name is a string).
 2. Our mouse-hover tooltip is not very useful right now. Add a parameter called `hover_name`, and assign `"Country"` to it.
 {{< /admonition >}}
 
@@ -178,12 +180,13 @@ with tab1:
 
 # build px chart object
 chart = px.scatter(
-    data_frame = demo_df,
-    x = "HDI index",
-    y = "GDP per capita",
-    color = "Continent",
-    size = "CO2 per capita",
-    hover_name = "Country")
+    data_frame=demo_df,
+    x="HDI index",
+    y="GDP per capita",
+    color="Continent",
+    size="CO2 per capita",
+    hover_name="Country",
+)
 
 # display the chart in tab2
 with tab2:

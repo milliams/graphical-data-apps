@@ -52,43 +52,46 @@ In the previous page we created a chart. This has some basic interactivity built
 You might have noticed that our dataset contains year information. We asked Plotly to use the entire dataframe as the data to plot, and this resulted in a strange chart where each country has multiple datapoints plotted, one for each year. We are going to fix this, by setting a widget to control which year the chart will display.
 
 ### A widget to control the chart
-Years are integers, and our data spans 1998 to 2018. So, we need a widget to select any of those integers. A perfect widget for this is a [slider](https://docs.streamlit.io/library/api-reference/widgets).
+Years are integers, and our data spans 1998 to 2018. So, we need a widget to select any of those integers. A perfect widget for this is a [slider](https://docs.streamlit.io/library/api-reference/widgets). We can programatically get the largest and smallest years from the data with `demo_df["Year"].min()` (will give 1998) and `demo_df["Year"].max()` (will give 2018).
 
 As with all of our widgets for this data app, we are going to put it in the sidebar - so be sure to put widget-assignment code *inside* the block starting `with st.sidebar:`. To create our slider, we add:
 
 ```Python
-year_widget = st.slider(
+year = st.slider(
     label="Year to chart",
-    min_value=1998,
-    max_value=2018)
+    min_value=demo_df["Year"].min(),
+    max_value=demo_df["Year"].max(),
+)
 ```
 
 Compared to the text input widget we used above, this one has three parameters: the descriptive label it will display, and the lowest and highest values. Like with the chart parameters, clarity is aided by putting each parameter on a new line. Save the file and check the changes on your app.
 
 ### Connecting the widget to the chart
-So far, the widget exists, and it stores a number in the variable `year_widget`, but it doesn't do anything. Currently, `px.scatter()` has been told to plot the whole dataset, with the parameter `data_frame = demo_df`. `demo_df` is a dataframe, so we can isolate the data we want by column value: `<the dataframe column> is equal to <a number>`, in this case with with `demo_df["Year"] == 2008`
+So far, the widget exists, and it stores a number in the variable `year`, but it doesn't do anything. Currently, `px.scatter()` has been told to plot the whole dataset, with the parameter `data_frame = demo_df`. `demo_df` is a dataframe, so we can isolate the data we want by column value: `<the dataframe column> is equal to <a number>`, in this case with with `demo_df["Year"] == 2008`
 
 We'll start by hard-coding this. Change your first parameter line in the chart, so it looks like:
 ```Python
 chart = px.scatter(
-    data_frame = demo_df[demo_df["Year"] == 2008],
-    x = "HDI index",
-    y = "GDP per capita",
-    color = "Continent",
-    size = "CO2 per capita",
-    hover_name = "Country")
+    data_frame=demo_df[demo_df["Year"] == 2008],
+    x="HDI index",
+    y="GDP per capita",
+    color="Continent",
+    size="CO2 per capita",
+    hover_name="Country",
+)
 ```
 
-Save, and see what the chart has done in your app. Try changing `2008` to another number, between 1998 and 2018, save and notice the changes. Now, to make this interactive, we need to link the widget value to the chart parameters. We do this by replacing our hard-coded number with the appropriate variable, in this case `year_widget`:
+Save, and see what the chart has done in your app. Try changing `2008` to another number, between 1998 and 2018, save and notice the changes. Now, to make this interactive, we need to link the widget value to the chart parameters. We do this by replacing our hard-coded number with the appropriate variable, in this case `year`:
 
 ```Python
 chart = px.scatter(
-    data_frame = demo_df[demo_df["Year"] == year_widget],
-    x = "HDI index",
-    y = "GDP per capita",
-    color = "Continent",
-    size = "CO2 per capita",
-    hover_name = "Country")
+    data_frame=demo_df[demo_df["Year"] == year],
+    x="HDI index",
+    y="GDP per capita",
+    color="Continent",
+    size="CO2 per capita",
+    hover_name="Country",
+)
 ```
 Save your script, and have a play with the app.
 
@@ -98,9 +101,9 @@ You now have a chart that displays one year at a time. Let's get some more contr
 {{< admonition type="question" title="Exercise 5: Axis scale controls" open=true >}}
 In your sidebar code block, and below your year slider widget, add a `st.checkbox()`:
 - Make the label read "Logarithmic Y-axis"
-- Assigning the value of your checkbox to a variable called `log_y_widget`
+- Assigning the value of your checkbox to a variable called `log_y`
 In your parameters for `px.scatter()`, add a new parameter:
-- `log_y`, being equal to the value of your widget labelled "Logarithmic Y-axis" (ie, the variable `log_y_widget`)
+- `log_y`, being equal to the value of your widget labelled "Logarithmic Y-axis" (ie, the variable `log_y`)
 Don't forget to separate your parameters with commas!
 {{< /admonition >}}
 
@@ -118,12 +121,12 @@ demo_df = pd.read_csv("demo_dataset.csv")
 with st.sidebar:
     st.title("World Demographics")
     user_name = st.text_input("Welcome - please enter your name.")
-    year_widget = st.slider(
-        label = "Year to chart",
-        min_value = 1998,
-        max_value = 2018)
-    log_y_widget = st.checkbox(
-        label = "Logarithmic Y-axis")
+    year = st.slider(
+        label="Year to chart",
+        min_value=demo_df["Year"].min(),
+        max_value=demo_df["Year"].max(),
+    )
+    log_y = st.checkbox("Logarithmic Y-axis")
     
 # create two columns, of ratio 3:1
 column1, column2 = st.columns([3, 1])
@@ -143,13 +146,14 @@ with tab1:
 
 # build px chart object
 chart = px.scatter(
-    data_frame = demo_df[demo_df["Year"] == year_widget],
-    x = "HDI index",
-    y = "GDP per capita",
-    log_y = log_y_widget,
-    color = "Continent",
-    size = "CO2 per capita",
-    hover_name = "Country")
+    data_frame=demo_df[demo_df["Year"] == year],
+    x="HDI index",
+    y="GDP per capita",
+    log_y=log_y,
+    color="Continent",
+    size="CO2 per capita",
+    hover_name="Country",
+)
 
 # display the chart in tab2
 with tab2:
@@ -176,12 +180,14 @@ but
 To do this, we will create two more widgets, this time [radio buttons](https://docs.streamlit.io/library/api-reference/widgets/st.radio). These are single-option, mutually-exclusive selectors (I think these are called "radio" because old radio buttons you would press to select a station, and it would deactivate the previous selection). In your sidebar code, and below your axis checkboxes, add:
 
 ```Python
-x_data_widget = st.radio(
-    label = "X-axis data",
-    options = column_names)
-y_data_widget = st.radio(
-    label = "Y-axis data",
-    options = column_names)
+x_data = st.radio(
+    label="X-axis data",
+    options=column_names,
+)
+y_data = st.radio(
+    label="Y-axis data",
+    options=column_names,
+)
 ```
 
 Save this... and you will get an error! The parameter `options` is expecting a list, but we gave it an undefined variable. Let's fix this, and connect it up, in this exercise.
@@ -211,40 +217,36 @@ import plotly.express as px
 # use pandas to read our CSV file into a dataframe called "demo_df"
 demo_df = pd.read_csv("demo_dataset.csv")
 
-# make a list of column names, to be passed to radio widgets
-column_names = [
-    "HDI index",
-    "GDP per capita",
-    "Life expectancy",
-    "CO2 per capita",
-    "Services"]
+column_names = ["HDI index", "GDP per capita", "Life expectancy", "CO2 per capita", "Services"]
 
 # build the sidebar
 with st.sidebar:
     st.title("World Demographics")
     user_name = st.text_input("Welcome - please enter your name.")
-    year_widget = st.slider(
-        label = "Year to chart",
-        min_value = 1998,
-        max_value = 2018)
-    log_y_widget = st.checkbox(
-        label = "Logarithmic Y-axis")
-    x_data_widget = st.radio(
-        label = "X-axis data",
-        options = column_names)
-    y_data_widget = st.radio(
-        label = "Y-axis data",
-        options = column_names)
-    
+    year = st.slider(
+        label="Year to chart",
+        min_value=demo_df["Year"].min(),
+        max_value=demo_df["Year"].max(),
+    )
+    log_y = st.checkbox("Logarithmic Y-axis")
+    x_data = st.radio(
+        label="X-axis data",
+        options=column_names,
+    )
+    y_data = st.radio(
+        label="Y-axis data",
+        options=column_names,
+    )
+
 # create two columns, of ratio 3:1
 column1, column2 = st.columns([3, 1])
 
 # place info box in first column
 with column1:
-    st.info("Welcome to the global demographic data explorer app.")
+    st.info("Welcome to the global demographic data explorer app!")
 with column2:
     st.info(f"Hi {user_name}!")
-    
+
 # create two tabs
 tab1, tab2 = st.tabs(["Data", "Visualisation"])
 
@@ -254,17 +256,19 @@ with tab1:
 
 # build px chart object
 chart = px.scatter(
-    data_frame = demo_df[demo_df["Year"] == year_widget],
-    x = x_data_widget,
-    y = y_data_widget,
-    log_y = log_y_widget,
-    color = "Continent",
-    size = "CO2 per capita",
-    hover_name = "Country")
+    data_frame=demo_df[demo_df["Year"] == year],
+    x=x_data,
+    y=y_data,
+    log_y=log_y,
+    color="Continent",
+    size="CO2 per capita",
+    hover_name="Country",
+)
 
 # display the chart in tab2
 with tab2:
     st.plotly_chart(chart)
+
 ```
 {{< /admonition >}}
 
