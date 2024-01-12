@@ -125,7 +125,7 @@ column1, column2 = st.columns([3, 1])
 
 # place info box in first column
 with column1:
-    st.info("Welcome to the global demographic data explorer app!")
+    st.info("Welcome to the global demographic data explorer app.")
 with column2:
     st.info(f"Hi {user_name}!")
 

@@ -39,7 +39,7 @@ Note that we are assigning the widget to a variable name, here called `user_name
 
 ```Python
 with column1:
-    st.info("Welcome to the global demographic data explorer app!")
+    st.info("Welcome to the global demographic data explorer app.")
 with column2:
     st.info(f"Hi {user_name}!")
 ```
@@ -58,7 +58,7 @@ As with all of our widgets for this data app, we are going to put it in the side
 
 ```Python
 year = st.slider(
-    label="Year to chart",
+    label="Year",
     min_value=demo_df["Year"].min(),
     max_value=demo_df["Year"].max(),
 )
@@ -122,7 +122,7 @@ with st.sidebar:
     st.title("World Demographics")
     user_name = st.text_input("Welcome - please enter your name.")
     year = st.slider(
-        label="Year to chart",
+        label="Year",
         min_value=demo_df["Year"].min(),
         max_value=demo_df["Year"].max(),
     )
@@ -133,7 +133,7 @@ column1, column2 = st.columns([3, 1])
 
 # place info box in first column
 with column1:
-    st.info("Welcome to the global demographic data explorer app!")
+    st.info("Welcome to the global demographic data explorer app.")
 with column2:
     st.info(f"Hi {user_name}!")
     
@@ -224,7 +224,7 @@ with st.sidebar:
     st.title("World Demographics")
     user_name = st.text_input("Welcome - please enter your name.")
     year = st.slider(
-        label="Year to chart",
+        label="Year",
         min_value=demo_df["Year"].min(),
         max_value=demo_df["Year"].max(),
     )
@@ -243,7 +243,7 @@ column1, column2 = st.columns([3, 1])
 
 # place info box in first column
 with column1:
-    st.info("Welcome to the global demographic data explorer app!")
+    st.info("Welcome to the global demographic data explorer app.")
 with column2:
     st.info(f"Hi {user_name}!")
 
